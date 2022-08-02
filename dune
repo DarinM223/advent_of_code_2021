@@ -1,0 +1,5 @@
+(library
+ (name advent)
+ (preprocess (pps ppx_deriving.show))
+ (flags (:standard -w +A))
+ (public_name advent_of_code_2021))
