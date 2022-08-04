@@ -1,7 +1,6 @@
 open Utils
 
 let path = "inputs/day8/input.txt"
-let ( << ) f g e = f (g e)
 
 let[@tail_mod_cons] rec parse seq =
   let split str = String.split_on_char ' ' (String.trim str) in
@@ -33,30 +32,23 @@ let string_permutations s =
 
 let code_permutations = string_permutations "abcdefg"
 
-let sort s =
-  let n = String.length s in
-  let a = Array.init n (fun i -> s.[i]) in
-  Array.fast_sort Char.compare a;
-  String.init n (fun i -> a.(i))
-
 let valid_digits =
-  Hashtbl.of_seq
-    (List.to_seq
+  Hashtbl.of_seq @@ List.to_seq
+  @@ List.concat
        [
-         ("abcefg", 0);
-         ("cf", 1);
-         ("acdeg", 2);
-         ("acdfg", 3);
-         ("bcdf", 4);
-         ("abdfg", 5);
-         ("abdefg", 6);
-         ("acf", 7);
-         ("abcdefg", 8);
-         ("abcdfg", 9);
-       ])
+         List.map (fun s -> (s, 0)) @@ string_permutations "abcefg";
+         List.map (fun s -> (s, 1)) @@ string_permutations "cf";
+         List.map (fun s -> (s, 2)) @@ string_permutations "acdeg";
+         List.map (fun s -> (s, 3)) @@ string_permutations "acdfg";
+         List.map (fun s -> (s, 4)) @@ string_permutations "bcdf";
+         List.map (fun s -> (s, 5)) @@ string_permutations "abdfg";
+         List.map (fun s -> (s, 6)) @@ string_permutations "abdefg";
+         List.map (fun s -> (s, 7)) @@ string_permutations "acf";
+         List.map (fun s -> (s, 8)) @@ string_permutations "abcdefg";
+         List.map (fun s -> (s, 9)) @@ string_permutations "abcdfg";
+       ]
 
-let convert code =
-  sort << String.map (fun ch -> String.get code (Char.code ch - Char.code 'a'))
+let convert code = String.map (fun ch -> code.[Char.code ch - Char.code 'a'])
 
 let find_code pattern =
   let rec find_first = function
@@ -81,6 +73,8 @@ let part2 =
   List.fold_left
     (fun acc (pat, out) ->
       let code = find_code pat in
-      let digits = List.map (Hashtbl.find valid_digits << convert code) out in
+      let digits =
+        List.map (fun s -> Hashtbl.find valid_digits (convert code s)) out
+      in
       acc + int_of_digits digits)
     0 entries
