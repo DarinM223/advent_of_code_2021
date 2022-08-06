@@ -5,8 +5,8 @@ let path = "inputs/day9/input.txt"
 let[@tail_mod_cons] rec parse seq =
   match seq () with
   | Seq.Cons (line, seq) ->
-      let num c = Char.code c - Char.code '0' in
-      Array.init (String.length line) (fun i -> num line.[i]) :: parse seq
+      Array.init (String.length line) (fun i -> Char.(code line.[i] - code '0'))
+      :: parse seq
   | Seq.Nil -> []
 
 let grid_index row col grid =
@@ -30,20 +30,16 @@ let is_low_point row col grid =
 
 let basin_size row col grid =
   let counted = Hashtbl.create 105 in
-  let rec check row col prev_value grid =
+  let rec check row col prev_value =
     match grid_index row col grid with
     | None | Some 9 -> ()
     | Some value when value < prev_value || Hashtbl.mem counted (row, col) -> ()
     | Some value ->
         Hashtbl.add counted (row, col) ();
-        check_adjs row col value
-  and check_adjs row col value =
-    List.fold_left
-      (fun () (row, col) -> check row col value grid)
-      () (adjs row col)
+        List.iter (fun (row, col) -> check row col value) (adjs row col)
   in
-  check_adjs row col grid.(row).(col);
-  Hashtbl.length counted + 1
+  check row col Int.min_int;
+  Hashtbl.length counted
 
 let part1 =
   let grid = Array.of_list @@ parse @@ lines_seq @@ open_in path in
