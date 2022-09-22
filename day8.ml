@@ -78,3 +78,6 @@ let part2 =
       in
       acc + int_of_digits digits)
     0 entries
+
+let%test "part1" = part1 = 512
+let%test "part2" = part2 = 1091165

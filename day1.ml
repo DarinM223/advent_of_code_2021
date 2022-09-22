@@ -33,3 +33,6 @@ let part2 =
       if curr_sum > prev_sum then count := !count + 1)
     lines;
   !count
+
+let%test "part1" = part1 = 1665
+let%test "part2" = part2 = 1702

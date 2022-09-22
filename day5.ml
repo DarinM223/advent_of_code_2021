@@ -52,3 +52,6 @@ let part2 =
   let parsed = parse @@ lines_seq @@ open_in path in
   let map = List.fold_left fill IntTupleMap.empty parsed in
   List.length @@ List.filter (fun (_, v) -> v > 1) @@ IntTupleMap.bindings map
+
+let%test "part1" = part1 = 6548
+let%test "part2" = part2 = 19663

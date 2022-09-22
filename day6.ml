@@ -30,3 +30,6 @@ let fish =
 
 let part1 = IntMap.fold (fun _ -> ( + )) (run_cycles fish 80) 0
 let part2 = IntMap.fold (fun _ -> ( + )) (run_cycles fish 256) 0
+
+let%test "part1" = part1 = 366057
+let%test "part2" = part2 = 1653559299811

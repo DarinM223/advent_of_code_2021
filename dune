@@ -1,6 +1,7 @@
 (library
  (name advent)
- (preprocess (pps ppx_deriving.show))
+ (inline_tests (deps (source_tree inputs)))
+ (preprocess (pps ppx_deriving.show ppx_inline_test))
  (flags (:standard -w +A))
  (libraries str)
  (public_name advent_of_code_2021))

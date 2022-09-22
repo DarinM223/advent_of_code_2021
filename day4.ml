@@ -134,3 +134,6 @@ let part1 =
 let part2 =
   let bingo, grids = parse @@ lines_seq @@ open_in path in
   last_score bingo grids
+
+let%test "part1" = part1 = 54275
+let%test "part2" = part2 = 13158
