@@ -40,6 +40,3 @@ let part2 =
     lines;
   let pos, depth, _ = !ctx in
   pos * depth
-
-let%test "part1" = part1 = 2117664
-let%test "part2" = part2 = 2073416724

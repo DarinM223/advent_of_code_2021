@@ -60,6 +60,3 @@ let part2 =
     if flashed = 100 then steps + 1 else run (steps + 1) grid
   in
   run 0 grid
-
-let%test "part1" = part1 = 1644
-let%test "part2" = part2 = 229

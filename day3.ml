@@ -117,6 +117,3 @@ let part2 =
   let oxygen = stage ( > ) 0 !numbers in
   let co2 = stage ( <= ) 0 !numbers in
   StringToBinary.(convert oxygen * convert co2)
-
-let%test "part1" = part1 = 1071734
-let%test "part2" = part2 = 6124992

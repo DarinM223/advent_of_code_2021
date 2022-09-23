@@ -63,6 +63,3 @@ let part2 =
   match List.rev (List.sort compare !basins) with
   | a :: b :: c :: _ -> a * b * c
   | _ -> failwith "There are less than three basins"
-
-let%test "part1" = part1 = 600
-let%test "part2" = part2 = 987840

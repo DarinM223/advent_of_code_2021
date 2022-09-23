@@ -66,6 +66,3 @@ let part2 =
   in
   Array.fast_sort compare scores;
   scores.(Array.length scores / 2)
-
-let%test "part1" = part1 = 315693
-let%test "part2" = part2 = 1870887234

@@ -41,6 +41,3 @@ let parse =
 let graph = parse @@ lines_seq @@ open_in path
 let part1 = num_paths 1 graph
 let part2 = num_paths 2 graph
-
-let%test "part1" = part1 = 5157
-let%test "part2" = part2 = 144309

@@ -38,6 +38,3 @@ let part2 =
   min
     (total_fuel_cost mean nums)
     (min (total_fuel_cost (mean - 1) nums) (total_fuel_cost (mean + 1) nums))
-
-let%test "part1" = part1 = 344138
-let%test "part2" = part2 = 94862124
