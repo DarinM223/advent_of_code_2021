@@ -3,4 +3,4 @@
 
 (package
   (name advent_of_code_2021)
-  (depends ppx_deriving))
+  (depends ppx_deriving alcotest))

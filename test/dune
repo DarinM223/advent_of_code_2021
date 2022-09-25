@@ -1,0 +1,4 @@
+(test
+ (name test_main)
+ (deps (source_tree .))
+ (libraries alcotest advent))
